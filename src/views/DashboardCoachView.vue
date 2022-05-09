@@ -13,7 +13,7 @@
                             {{name}}
                         </span>
                         <span class="text-gray-400 text-xs">
-                            User
+                            Coach
                         </span>
                     </div>
                 </div>
@@ -32,26 +32,26 @@
                 <div class="lg:mt-0 lg:flex-shrink-0">
                     <div class=" inline-flex rounded-md shadow">
                         <label for="my-modal-3" class="py-4 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">Buat Room</label>
-                        <!-- <button type="button" class="">
-                            Buat Room
-                        </button> -->
                     </div>
                 </div>
-                <ModalJoin /> 
+                <ModalCreate /> 
             </div>
         </div>
     </div>
 </template>
 <script>
-import ModalJoin from '../components/ModalJoinRoom.vue'
+import ModalCreate from '../components/ModalCreateRoom.vue'
 export default {
+    components:{
+        ModalCreate
+    },
     data(){
         return {
-            name: localStorage.getItem('name')
+            name: localStorage.getItem('name'),
         }
     },
     components:{
-        ModalJoin,
+        ModalCreate,
     }
 }
 </script>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import WelcomeView from "../views/WelcomeView.vue";
+import CategoryView from "../views/CategoryView.vue";
 import DashboardView from "../views/DashboardUserView.vue";
 import DashboardCoachView from "../views/DashboardCoachView.vue";
 import CoachingView from "../views/CoachingView.vue";
@@ -14,12 +15,17 @@ const router = createRouter({
       component: WelcomeView
     },
     {
+      path: '/category',
+      name: 'category-view',
+      component: CategoryView
+    },
+    {
       path: '/:token/:name',
       name: 'welcome-view-token',
       component: WelcomeView
     },
     {
-      path: "/dashboard/user/:slug",
+      path: "/dashboard/user",
       name: "dashboard-view",
       component: DashboardView,
     },
@@ -29,7 +35,7 @@ const router = createRouter({
       component: DashboardCoachView
     },
     {
-      path: "/coaching",
+      path: "/coaching/",
       name: 'coaching-view',
       component: CoachingView
     },
@@ -37,8 +43,18 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'welcome-view' && to.name !== 'welcome-view' && localStorage.getItem('status') !== 'loggedIn') next({ name: 'welcome-view' })
-  else next();
-})
+  if (localStorage.getItem("token") == null) {
+    if (to.name !== "welcome-view") {
+      next({
+        name: "welcome-view",
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
 
 export default router;
