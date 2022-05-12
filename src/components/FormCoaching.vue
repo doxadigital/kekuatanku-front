@@ -1,24 +1,24 @@
 <template>
-    <div class="mb-6 ml-2">
+  <div class="mb-6 ml-10">
         <div class=" relative ">
           <label for="name-with-label" class="text-gray-700">
               Nama
           </label>
-          <input type="text" id="name-with-label" class="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" v-model="name" placeholder="Nama"/>
+          <input style="width: 18rem;" type="text" id="name-with-label" class="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" v-model="name" placeholder="Nama"/>
         </div>
 	</div>
-    <div class="mb-6 ml-2">
+  <div class="mb-6 ml-10">
         <div class=" relative ">
             <label for="name-with-label" class="text-gray-700">
             Tanggal Lahir 
             </label>
-            <input type="text" id="name-with-label" class="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" name="email" placeholder="Tanggal Lahir" v-model="birthDate"/>
+            <input style="width: 18rem;" type="text" id="name-with-label" class="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" name="email" placeholder="Tanggal Lahir" v-model="birthDate"/>
         </div>
 	</div>
-    <div class="mb-6 ml-2">
+  <div class="mb-6 ml-10">
 	    <label class="text-gray-700" for="animals">
                 Jumlah Kartu
-            <select v-model="selectedNumber" class="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+            <select style="width: 18rem;" v-model="selectedNumber" class="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
                 <option value="0">
                     Silahkan Pilih Opsi
                 </option>
@@ -28,10 +28,10 @@
             </select>
         </label>
 	</div>
-    <div class="mb-6 ml-2">
-	        <label class="text-gray-700">
+  <div class="mb-6 ml-10">
+	      <label class="text-gray-700">
                 Jenis Coaching
-            <select v-model="selectedJenis" class="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" name="animals">
+            <select style="width: 18rem;" v-model="selectedJenis" class="block w-52 py-2 px-10 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
                 <option value="">
                     Silahkan Pilih Opsi
                 </option>
@@ -41,46 +41,48 @@
             </select>
         </label>
 	</div>
-    <div class="table-form" v-if="selectedNumber != 0">
+  <div class="grid grid-cols-6 gap-4">
+    <div class="col-start-2 col-span-4 table-form" v-if="selectedNumber != 0">
         <label for="name-with-label" class="text-gray-700 placment-content-center">
           PILIH NOMOR KARTU
         </label>
         <table class="table-auto">
           <tbody>
             <tr>
-              <th v-for="col in selectedNumber">
+              <th v-for="(col, index) in selectedNumber">
                 <div class=" relative ">
-                  <input type="text" id="rounded-email" class=" rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:border-transparent" placeholder="Nomor Kartu" v-model="numberCard"/>
+                  <input type="text" id="rounded-email" class=" rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:border-transparent" placeholder="Nomor Kartu" v-model="numberCard[index]"/>
                 </div>
               </th>
             </tr>
           </tbody>
         </table>
+        <button class="btn btn-accent mt-5" @click="getRumus()">Submit</button>
     </div>
-    <button @click="getRumus()">Submit</button>
-    <div v-if="selectedNumber != 0" v-for="res in selectedNumber" class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-        <!-- Article -->
-        <article class="overflow-hidden rounded-lg shadow-lg">
-            <a href="#">
-                <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
-            </a>
-            <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                <h1 class="text-lg">
-                    <a class="no-underline hover:underline text-black" href="#">
-                        Article Title
-                    </a>
-                </h1>
-            </header>
-            <footer class="flex text-center items-center justify-between leading-none p-2 md:p-4">
-                <h4>
-                  Contoh pertanyaan??????
-                </h4>
-            </footer>
-        </article>
-        <!-- END Article -->
+  </div>
+  <div id="selectedCard" class="grid grid-cols-3 gap-6 my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-full">
+    <div v-for="(col, index) in selectedNumber" >
+      <article class="article overflow-hidden rounded-lg shadow-lg">
+        <div class="">
+          <img class="imagesCard block h-auto w-full">
+        </div>
+        <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+            <h1 class="text-lg">
+              <a class="titleCard no-underline hover:underline text-black" href="#">
+                                                
+              </a>
+            </h1>
+        </header>
+        <footer class="flex text-center items-center justify-between leading-none p-2 md:p-4">
+          <h4 class="questCard">
+                      
+          </h4>
+        </footer>
+      </article>
     </div>
+  </div>
     <!-- END Column -->
-    <div class="container mx-auto mt-8">
+    <!-- <div class="container mx-auto mt-8">
       <div class="max-w-2xl border rounded">
         <div>
           <div class="w-full">
@@ -123,7 +125,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+  <div class="grid grid-rows-3 grid-flow-col gap-4">
+    <button @click="deleteRoom()" class="row-start-1 row-end-4 btn btn-warning">Akhiri Sesi</button>
+  </div>
 </template>
 
 <script>
@@ -133,9 +138,12 @@ export default {
             name: localStorage.getItem('name'),
             number_card: [],
             coaching_select: [],	
+            selectedTitle: "",
+            selectedImages: null,
+            selectedQuest: "",
             selectedNumber: 0,
             birthDate: null,
-            numberCard: null,
+            numberCard: [],
             selectedJenis: null,
             results: 0
         }
@@ -154,18 +162,61 @@ export default {
         })  
     },
     methods: {
-        getRumus(){
-            if(this.selectedJenis == null){
-                alert('Silahkan Pilih Jenis');
+        async getRumus(){
+            if(this.selectedJenis == null && this.birthDate == null){
+                alert('Silahkan Isi Semua Field');
             } else {
-                if (this.selectedJenis == 'P1ntu') {
-                    if((this.numberCard+this.birthDate)% 77 ==0,77,(this.numberCard+this.birthDate) % 77){
-                        alert(parseInt(this.numberCard)+parseInt(this.birthDate) % 77)
+              if (this.selectedJenis == 'P1ntu') {
+                for(var i = 0; i < this.numberCard.length; i++){
+                    if((this.numberCard[i]+this.birthDate)% 77 ==0,77,(this.numberCard[i]+this.birthDate) % 77){
+                          var result = parseInt(this.numberCard[i])+parseInt(this.birthDate) % 77
+                          await this.axios.get(import.meta.env.VITE_BASE_URL_API + `api/selected-card/` + result)
+                          .then(res => {
+                              this.selectedTitle = res.data.data.title
+                              this.selectedQuest = res.data.data.question
+                              this.selectedImages = res.data.data.images
+                          })
+                          
+                          var title = document.getElementById('selectedCard').querySelectorAll('.titleCard')
+                          var images = document.getElementById('selectedCard').querySelectorAll('.imagesCard')
+                          var quest = document.getElementById('selectedCard').querySelectorAll('.questCard')
+                          title[i].innerHTML = this.selectedTitle
+                          quest[i].innerHTML = this.selectedQuest
+                          images[i].src = this.selectedImages
                     }
-                } else if ((this.numberCard+this.birthDate) % 99 == 0,99,(this.numberCard+this.birthDate) % 99){
-                    alert(parseInt(this.numberCard)+parseInt(this.birthDate) % 99)
                 }
+              } else{
+                for(var i = 0; i < this.numberCard.length; i++){
+                  if ((this.numberCard[i]+this.birthDate) % 99 == 0,99,(this.numberCard[i]+this.birthDate) % 99){
+                      var result = parseInt(this.numberCard[i])+parseInt(this.birthDate) % 99
+                      await this.axios.get(import.meta.env.VITE_BASE_URL_API + `api/selected-card/` + result)
+                      .then(res => {
+                        this.selectedTitle = res.data.data.title
+                        this.selectedQuest = res.data.data.question
+                        this.selectedImages = res.data.data.images
+                      })
+
+                      var title = document.getElementById('selectedCard').querySelectorAll('.titleCard')
+                      var images = document.getElementById('selectedCard').querySelectorAll('.imagesCard')
+                      var quest = document.getElementById('selectedCard').querySelectorAll('.questCard')
+                      title[i].innerHTML = this.selectedTitle
+                      quest[i].innerHTML = this.selectedQuest
+                      images[i].src = this.selectedImages
+                  }
+                }
+              }
             }
+        },
+        deleteRoom(){
+          const roomcode = this.$route.query.code;
+          this.axios.delete(import.meta.env.VITE_BASE_URL_API + `api/delete-room/` + roomcode )
+          .then(res => {
+            if (localStorage.getItem('role') == "user") {
+              this.$router.push({name: 'dashboard-view'})             
+            } else {
+              this.$router.push({name: 'dashboard-coach-view'})
+            }
+          })
         }
     }
 }

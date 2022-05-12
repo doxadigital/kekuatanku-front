@@ -36,8 +36,6 @@ export default {
         }
     },
     created(){
-        // this.dcryptToken()
-
         this.axios.get(import.meta.env.VITE_BASE_URL_API + `api/category-coaching`)
         .then(res => {
             // console.log(res.data.data);
@@ -45,19 +43,7 @@ export default {
         })
     },
     methods:{
-        // dcryptToken(){
-        //     let querytoken = this.$route.query.token;
-        //     let username = this.$route.query.name;
-        //     console.log(username);
-        //     if(querytoken != null){
-        //         this.axios.get(import.meta.env.VITE_BASE_URL_API + `/api/getDcryptToken/` + querytoken)
-        //         .then(res => {
-        //             // console.log(res.data.token);
-        //             this.token = res.data.token
-        //             this.user_name = username
-        //         })
-        //     }
-        // },
+
         submitLocalStorage(){
             if(this.selectedCategories == null){
                 alert("Silahkan Pilih Kategori Terlebih Dahulu!")
